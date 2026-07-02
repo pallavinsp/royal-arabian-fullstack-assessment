@@ -15,8 +15,11 @@ const config: Config = {
         'ra-gold': '#D0AF21',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
+      keyframes: { 'subtle-zoom': { '0%': { transform: 'scale(1)' }, '100%': { transform: 'scale(1.04)' } } },
+      animation: { 'subtle-zoom': 'subtle-zoom 12s ease-out both' },
     },
   },
   plugins: [],

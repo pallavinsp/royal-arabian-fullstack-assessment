@@ -1,116 +1,70 @@
-# Royal Arabian Developer Assessment
+# Royal Arabian — China Destination
 
-Starter repository for the Senior Full-Stack Developer assessment.
+A production-ready luxury travel experience for China, built with Next.js 14 App Router, React, TypeScript, Tailwind CSS and Sanity CMS.
 
-## Tech Stack
-
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **CMS:** Sanity
-- **Deployment:** Vercel
-
-## Getting Started
-
-### 1. Clone and Install
+## Installation
 
 ```bash
-git clone <your-repo-url>
+git clone <repository-url>
 cd ra-developer-assessment
 npm install
-```
-
-### 2. Set Up Sanity
-
-1. Create a free Sanity account at [sanity.io](https://www.sanity.io/)
-2. Create a new project
-3. Copy the schemas from `sanity/schemas/` to your Sanity project
-4. Add sample content for China destination and at least 3 packages
-
-### 3. Configure Environment
-
-```bash
 cp .env.example .env.local
-```
-
-Edit `.env.local` with your Sanity project details:
-
-```
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-```
-
-### 4. Run Development Server
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+The storefront is available at `http://localhost:3000/cn`. Package pages use `/cn/packages/[slug]`.
 
-## Project Structure
+## Sanity setup
 
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx          # Root layout
-│   ├── page.tsx            # Homepage
-│   └── globals.css         # Global styles
-├── lib/
-│   └── sanity.ts           # Sanity client configuration
-└── types/
-    └── index.ts            # TypeScript types
-
-sanity/
-└── schemas/                # Sanity schema references
-    ├── destination.ts      # Destination schema
-    └── package.ts          # Package schema
-```
-
-## Your Task
-
-Build the China destination page at `/cn` that:
-
-1. Pulls content from Sanity CMS
-2. Displays destination info (hero, description, highlights)
-3. Shows at least 3 travel packages with pricing
-4. Is fully responsive
-5. Follows the design reference at [royalarabian.com/cn](https://royalarabian.com/cn)
-
-See the assessment document for full requirements and evaluation criteria.
-
-## Brand Colors
-
-Already configured in `tailwind.config.ts`:
-
-- Navy: `#1C355E` → `text-ra-navy`, `bg-ra-navy`
-- Orange: `#C46A3B` → `text-ra-orange`, `bg-ra-orange`
-- Gold: `#D0AF21` → `text-ra-gold`, `bg-ra-gold`
-
-## Useful Commands
+This repository includes a configured standalone Sanity Studio and registered `destination`, `package`, and reusable `seo` schemas. The schemas use Sanity's current `defineType`, `defineField`, and `defineArrayMember` APIs.
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
+npm run studio
 ```
+
+The Studio opens at `http://localhost:3333`. Create a Destination with slug `cn`, then create Package documents that reference it. Featured packages are displayed first. Images should include alternative text and can be cropped using Sanity hotspots.
+
+For a hosted storefront, add its URL as an allowed CORS origin in [Sanity Manage](https://www.sanity.io/manage).
+
+## Environment variables
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=x0gfl5n9
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2026-07-02
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+Only public read access is used; no API token is needed for a public dataset. Keep the dated API version stable unless intentionally adopting newer Sanity behavior.
+
+## Useful commands
+
+```bash
+npm run dev           # Next.js development server
+npm run lint          # ESLint
+npm run build         # Production build
+npm run start         # Run the production build
+npm run studio        # Sanity Studio development server
+npm run studio:build  # Validate and build Sanity Studio
+```
+
+## Architecture
+
+- `src/app/cn` — destination route, loading/error states, and package detail route
+- `src/components` — reusable presentation components
+- `src/lib/queries.ts` — projected, parameterized GROQ queries
+- `src/lib/sanity.ts` — Sanity client and image URL builder
+- `src/lib/helpers.ts` — currency and metadata helpers
+- `src/types` — domain types shared by server components
+- `sanity/schemas` — registered CMS schemas
+
+Content is fetched in async Server Components and revalidated hourly. Destination and package metadata is generated dynamically from Sanity, including canonical, Open Graph, Twitter and robots directives. Sanity images use `next/image`, responsive sizing, hotspot crops and optional LQIP placeholders.
 
 ## Deployment
 
-Deploy to Vercel:
+1. Push the repository to GitHub and import it into Vercel.
+2. Add all variables from `.env.example`, setting `NEXT_PUBLIC_SITE_URL` to the production URL.
+3. Add that URL to the Sanity project's CORS origins.
+4. Deploy. Vercel runs `npm run build` automatically.
 
-1. Push your code to GitHub
-2. Import the repo in [Vercel](https://vercel.com/)
-3. Add environment variables
-4. Deploy
-
-## Resources
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Sanity Documentation](https://www.sanity.io/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-
----
-
-Good luck! 🚀
+The Studio may be deployed separately with `npx sanity deploy`, or hosted through another static deployment workflow after `npm run studio:build`.

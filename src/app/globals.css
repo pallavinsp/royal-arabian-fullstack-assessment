@@ -2,20 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply text-gray-900 antialiased;
-  }
+  * { @apply border-slate-200; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-white text-slate-900 antialiased; font-family: var(--font-inter), sans-serif; }
+  ::selection { @apply bg-ra-gold text-ra-navy; }
+  a, button { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ra-gold focus-visible:ring-offset-2; }
 }
 
-/* Custom utilities */
-@layer utilities {
-  .container-ra {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
+@layer components {
+  .container-ra { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
+  .section-pad { @apply py-20 sm:py-24 lg:py-28; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[.25em] text-ra-orange; }
+  .heading { @apply font-serif text-4xl leading-tight text-ra-navy sm:text-5xl; }
 }
