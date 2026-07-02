@@ -1,70 +1,121 @@
-# Royal Arabian — China Destination
+# Royal Arabian Full Stack Assessment
 
-A production-ready luxury travel experience for China, built with Next.js 14 App Router, React, TypeScript, Tailwind CSS and Sanity CMS.
+A production-ready travel website built as part of the Royal Arabian Full Stack Developer Assessment.
 
-## Installation
+## 🚀 Live Demo
 
-```bash
-git clone <repository-url>
-cd ra-developer-assessment
-npm install
-cp .env.example .env.local
-npm run dev
+**Vercel URL:** *(Add your deployed Vercel URL here after deployment)*
+
+Example:
+
+https://royal-arabian-fullstack-assessment.vercel.app
+
+---
+
+## 📂 GitHub Repository
+
+https://github.com/pallavinsp/royal-arabian-fullstack-assessment
+
+---
+
+## 🛠 Tech Stack
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Sanity CMS
+- Vercel
+
+---
+
+## ✨ Features
+
+- Dynamic destination page powered by Sanity CMS
+- Dynamic package detail pages
+- Responsive UI
+- SEO metadata support
+- Image optimization
+- TypeScript implementation
+- Component-based architecture
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+ ├── app/
+ ├── components/
+ ├── lib/
+ ├── types/
+
+sanity/
 ```
 
-The storefront is available at `http://localhost:3000/cn`. Package pages use `/cn/packages/[slug]`.
+---
 
-## Sanity setup
+## ⚙️ Environment Variables
 
-This repository includes a configured standalone Sanity Studio and registered `destination`, `package`, and reusable `seo` schemas. The schemas use Sanity's current `defineType`, `defineField`, and `defineArrayMember` APIs.
-
-```bash
-npm run studio
-```
-
-The Studio opens at `http://localhost:3333`. Create a Destination with slug `cn`, then create Package documents that reference it. Featured packages are displayed first. Images should include alternative text and can be cropped using Sanity hotspots.
-
-For a hosted storefront, add its URL as an allowed CORS origin in [Sanity Manage](https://www.sanity.io/manage).
-
-## Environment variables
+Create a `.env.local` file with:
 
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=x0gfl5n9
 NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2026-07-02
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_SANITY_API_VERSION=2025-07-02
 ```
 
-Only public read access is used; no API token is needed for a public dataset. Keep the dated API version stable unless intentionally adopting newer Sanity behavior.
+---
 
-## Useful commands
+## ▶️ Run Locally
+
+Install dependencies:
 
 ```bash
-npm run dev           # Next.js development server
-npm run lint          # ESLint
-npm run build         # Production build
-npm run start         # Run the production build
-npm run studio        # Sanity Studio development server
-npm run studio:build  # Validate and build Sanity Studio
+npm install
 ```
 
-## Architecture
+Start the development server:
 
-- `src/app/cn` — destination route, loading/error states, and package detail route
-- `src/components` — reusable presentation components
-- `src/lib/queries.ts` — projected, parameterized GROQ queries
-- `src/lib/sanity.ts` — Sanity client and image URL builder
-- `src/lib/helpers.ts` — currency and metadata helpers
-- `src/types` — domain types shared by server components
-- `sanity/schemas` — registered CMS schemas
+```bash
+npm run dev
+```
 
-Content is fetched in async Server Components and revalidated hourly. Destination and package metadata is generated dynamically from Sanity, including canonical, Open Graph, Twitter and robots directives. Sanity images use `next/image`, responsive sizing, hotspot crops and optional LQIP placeholders.
+Open:
 
-## Deployment
+```
+http://localhost:3000
+```
 
-1. Push the repository to GitHub and import it into Vercel.
-2. Add all variables from `.env.example`, setting `NEXT_PUBLIC_SITE_URL` to the production URL.
-3. Add that URL to the Sanity project's CORS origins.
-4. Deploy. Vercel runs `npm run build` automatically.
+---
 
-The Studio may be deployed separately with `npx sanity deploy`, or hosted through another static deployment workflow after `npm run studio:build`.
+## 🏗 Build
+
+```bash
+npm run build
+```
+
+---
+
+## 🚀 Deployment
+
+The application is deployed on **Vercel**.
+
+After deployment, update the **Live Demo** section above with your Vercel URL.
+
+---
+
+## 👩‍💻 Developer
+
+Pallavi NS
+
+GitHub:
+https://github.com/pallavinsp
+
+---
+
+## 📌 Notes
+
+- Content is managed using **Sanity CMS**.
+- Dynamic routing is implemented for destinations and packages.
+- Environment variables are configured in Vercel.
