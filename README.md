@@ -4,9 +4,7 @@ A production-ready travel website built as part of the Royal Arabian Full Stack 
 
 ## 🚀 Live Demo
 
-**Vercel URL:** *(Add your deployed Vercel URL here after deployment)*
-
-Example:
+**Vercel URL:** 
 
 https://royal-arabian-fullstack-assessment.vercel.app
 
@@ -101,7 +99,7 @@ npm run build
 
 The application is deployed on **Vercel**.
 
-After deployment, update the **Live Demo** section above with your Vercel URL.
+https://royal-arabian-fullstack-assessment.vercel.app
 
 ---
 
